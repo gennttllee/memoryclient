@@ -11,6 +11,14 @@
     background-color: white;
 }
 
+.invalid{
+    width: 100%;
+    text-align: center;
+    background-color: inherit;
+    color: inherit;
+    font-weight: normal;
+}
+
 .darkForm {
     background-color: rgba(128, 128, 128, 0.363);
 }

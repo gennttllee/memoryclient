@@ -10,7 +10,7 @@ import { addUser, user, signIn, signUp, getStatus, googleReg } from '../features
 const Auth = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const initial = { firstName: '', lastName: '', email: '',picture : '' , password: '', confirmPassword: '' }
+    const initial = { firstName: '', lastName: '', email: '', picture: '', password: '', confirmPassword: '' }
     const [data, setData] = useState(initial)
     const [log, setLog] = useState(true)
     const mode = useSelector(theme);
@@ -63,7 +63,7 @@ const Auth = () => {
         if (log) {
             dispatch(signIn(data))
         } else {
-            if(data.picture){
+            if (data.picture) {
                 dispatch(signUp(data))
             } else return;
         }
@@ -73,14 +73,11 @@ const Auth = () => {
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
-    if (status.idle === 'failed') {
-        return(
-            <h1 className='loading'>Invalid credentials refresh the page to try again</h1>
-        )
-    }
+
 
     return (
         <form onSubmit={submitForm} className={mode ? 'form1 darkForm' : 'form1'}>
+            {status.idle === 'failed' && <h2 className='invalid'>Invalid credentials</h2>}
             {!log &&
                 <>
                     <fieldset className='fieldset1'>
@@ -101,7 +98,7 @@ const Auth = () => {
                 <FileBase
                     type='file'
                     multiple={false}
-                    onDone={({base64}) => setData({...data, picture :base64})}
+                    onDone={({ base64 }) => setData({ ...data, picture: base64 })}
                 />
             </div>}
             <fieldset className='fieldset1'>
@@ -112,7 +109,7 @@ const Auth = () => {
                 <legend>Confirm Password</legend>
                 <input className='input1' required onChange={handle} name='confirmPassword' type='password' />
             </fieldset>}
-            <button className='btnSubmit' type='submit'>{status === 'loading' ? 'loading' : 'Submit'}</button>
+            <button className='btnSubmit' type='submit'>{status.idle === 'loading' ? 'loading' : 'Submit'}</button>
             <div className='google' id='div'></div>
             {!log ? <button className='btnLog' onClick={login}>already have an account ? Login here</button> : <button className='btnLog' onClick={sign}>Don't have an account ? sign up</button>}
         </form>
