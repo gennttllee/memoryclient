@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import Layout from './components/Layout';
 import './App.css';
+import { useSelector } from 'react-redux';
+import { user } from './features/users/userSlice'
+import { useNavigate } from 'react-router-dom';
+import Posts from './components/posts/Posts';
+import {useEffect} from 'react';
 
 function App() {
+  const navigate = useNavigate();
+  const userInfo = useSelector(user);
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/')
+    }
+  }, [userInfo, navigate]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    userInfo && <Layout>
+      <Posts />
+    </Layout>
   );
 }
 

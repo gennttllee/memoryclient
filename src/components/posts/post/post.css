@@ -1,0 +1,285 @@
+.postDiv {
+    background-color: white;
+    position: relative;
+    color: black;
+}
+
+.dark {
+    color: white;
+    background-color: rgba(128, 128, 128, 0.311);
+}
+
+.headDiv {
+    display: flex;
+    gap: .7rem;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+
+
+.postHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 97%;
+    margin: .4rem auto 0;
+}
+
+.comments {
+    padding: .2rem 0 0;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    background-color: inherit;
+    color: inherit;
+    position: relative;
+}
+
+.iconic {
+    position: relative;
+    color: #5d84da;
+    animation: pop;
+    animation-duration: 1s;
+}
+
+@keyframes pop {
+    from {
+        top: -50rem
+    }
+
+    ;
+
+    to {
+        top: 0
+    }
+
+    ;
+}
+
+.postName {
+    margin: 0;
+    padding: 0;
+    text-transform: capitalize;
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+
+.tag {
+    margin-left: .2rem;
+    font-weight: 300;
+}
+
+.image {
+    width: 14rem;
+}
+
+.swiper-button-prev {
+    color: white !important;
+}
+
+.swiper-button-next {
+    color: white !important;
+}
+
+.swiper-pagination-bullet {
+    background-color: white !important;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: black !important;
+}
+
+.swiper-pagination {
+    height: 3rem !important;
+    bottom: -5% !important;
+    background-color: transparent;
+}
+
+.slider {
+    width: 100%;
+    height: 100%;
+}
+
+.swipeHarry {
+    width: 97%;
+    margin: 0 auto 0;
+}
+
+.postMess {
+    margin: 1rem .5rem 1rem;
+    line-height: 1.3;
+    font-weight: normal;
+}
+
+.postTags {
+    margin: 1rem .5rem;
+    font-weight: normal;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.postTime {
+    margin: .2rem .5rem 1rem;
+    font-weight: 300;
+}
+
+.btnDiv {
+    display: flex;
+    width: 97%;
+    gap: 1rem;
+    margin: 1rem auto 0;
+    align-items: center;
+}
+
+.shareBtn {
+    margin: 0 1px 0 auto;
+    border: none;
+    background-color: inherit;
+    color: inherit;
+}
+
+.likes {
+    margin: 0;
+}
+
+.baby {
+    width: 90%;
+    top: 10%;
+    padding: 0 1rem;
+    margin: 1rem auto;
+    position: absolute;
+    background-color: white;
+    z-index: 1;
+    height: fit-content;
+    color: black;
+}
+
+.materialBtn {
+    display: flex;
+    width: 100%;
+    margin: .2rem;
+    height: fit-content;
+    justify-content: flex-end;
+    background-color: inherit;
+    color: inherit;
+    border: none;
+}
+
+.babyDark {
+    width: 90%;
+    top: 10%;
+    padding: 0 1rem;
+    margin: 1rem auto;
+    position: absolute;
+    background-color: rgb(48, 47, 47);
+    z-index: 1;
+    height: fit-content;
+    color: white;
+}
+
+.picnic {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+}
+
+.picnicDiv {
+    width: 100%;
+    height: 19rem;
+    overflow-y: auto;
+}
+
+.picnicDiv::-webkit-scrollbar {
+    display: none;
+}
+
+.pixelDiv {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.pixelName {
+    margin: 0;
+}
+
+.pixelComment {
+    margin: 0;
+}
+
+.pixel {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .5rem;
+}
+
+.babyInput {
+    width: 70%;
+    padding-left: 1rem;
+    border: solid black;
+    border-width: 1px 1px;
+}
+
+.babyInput:focus {
+    outline: none;
+    border: solid black;
+    border-width: 0 1px 1px 0;
+}
+
+.babyBtn {
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    color: inherit;
+}
+
+.plane {
+    transform: scale(1.5);
+    padding: 0;
+    margin: 0;
+}
+
+.babyDiv {
+    display: flex;
+    gap: .3rem;
+    width: 100%;
+}
+
+.likeBox {
+    width: 95%;
+    margin: .2rem auto;
+    display: flex;
+    gap: 1rem;
+}
+
+.likesBtn {
+    border: none;
+    background-color: transparent;
+    font-size: 1.3rem;
+    margin: 0 0 .2rem;
+    z-index: 1;
+    color: inherit;
+}
+
+.edit {
+    border: none;
+    padding: .2rem 0 0;
+    background-color: transparent;
+    font-size: 1.2rem;
+    color: inherit;
+    font-weight: bolder;
+}
+
+
+@media screen and (max-width :600px) {
+    .swiper-button-prev {
+        display: none !important;
+    }
+
+    .swiper-button-next {
+        display: none !important;
+    }
+}

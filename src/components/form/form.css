@@ -1,0 +1,85 @@
+.form{
+    width: 20rem;
+    height: fit-content;
+    padding-bottom: 1rem;
+}
+
+.dark{
+    color: white;
+    background-color: rgba(128, 128, 128, 0.311);
+}
+
+.x{
+    color:  steelblue;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+}
+
+.scale{
+    transform: scale(2);
+    margin: .7rem .7rem 0 0;
+}
+
+.fileDiv{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.h3{
+    text-align: center;
+    font-size: 1.4rem;
+    margin: 1rem 0 .5rem;
+    text-transform: uppercase;
+}
+
+.input{
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 1.3rem;
+    background-color: inherit;
+    color: inherit;
+}
+
+.fieldSet{
+    width: 50%;
+    margin: .5rem auto;
+}
+
+.fieldSet:focus-within{
+    border-color:  steelblue;
+    outline-color:  steelblue;
+}
+
+.fieldSet:focus-within > legend{
+    color: steelblue;
+}
+
+.input:focus{
+    outline: none;
+    border: none;
+}
+
+.btn{
+    display: block;
+    width: 90%;
+    height: 2.5rem;
+    border: none;
+    margin: 1rem auto;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    background-color: steelblue;
+    color: white;
+}
+
+.none{
+    display: block;
+    width: 90%;
+    height: 2.5rem;
+    border: none;
+    margin: 1rem auto;
+    background-color: rgba(128, 128, 128, 0.3);
+}
