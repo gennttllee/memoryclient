@@ -73,6 +73,12 @@ const Auth = () => {
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
+    if (status.idle === 'failed') {
+        return(
+            <h1 className='loading'>Invalid credentials refresh the page to try again</h1>
+        )
+    }
+
     return (
         <form onSubmit={submitForm} className={mode ? 'form1 darkForm' : 'form1'}>
             {!log &&

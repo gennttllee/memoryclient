@@ -3,7 +3,7 @@ import * as API from '../../api/index.js'
 
 const initialState = {
     user: JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : null,
-    status: 'idle',
+    status: {idle : 'idle', finish :{}},
 }
 
 export const signIn = createAsyncThunk('user/signIn', async (data) => {
@@ -37,14 +37,14 @@ const userSlice = createSlice({
     extraReducers(builder) {
         builder
             .addCase(signIn.pending, (state, action) => {
-                state.status = 'loading'
+                state.status.idle = 'loading'
             })
             .addCase(signIn.rejected, (state, action) => {
-                state.status = 'failed'
-                console.log(action.error)
+                state.status.idle = 'failed'
+                state.status.finish = action.error;
             })
             .addCase(signIn.fulfilled, (state, action) => {
-                state.status = 'success'
+                state.status.idle = 'success'
                 const profile = { ...action.payload.result, token: action.payload.token }
                 state.user = profile;
                 localStorage.setItem('user', JSON.stringify(profile))
