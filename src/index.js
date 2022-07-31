@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 import Search from './pages/Search';
 import Creator from './pages/Creator';
 import PostId from './pages/PostId';
+import Support from './pages/Support'
 
 store.dispatch(fetchPosts())
 
@@ -23,6 +24,7 @@ root.render(
         <Routes>
           <Route path="/" element={<Auth />} />
           <Route path="home" element={<App />} />
+          <Route path="support" element={<Support/>} />
           <Route path="profile" element={<Profile />} />
           <Route path='search/:key' element={<Search />} />
           <Route path="profile/:creator" element={<Creator />} />
