@@ -88,10 +88,12 @@ const Post = ({ post }) => {
                     modules={[Navigation, Pagination, A11y]}
                     spaceBetween={0}
                     slidesPerView={1}
+                    scrollbar={{draggable : true}}
                     navigation
                     pagination={{ clickable: true }}
                 >
                     {post.file.map((item, index) => <SwiperSlide key={index}> <img className='slider' src={item} alt='upload' /></SwiperSlide>)}
+                    .
                 </Swiper>
             </div>
 
