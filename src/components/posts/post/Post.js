@@ -116,7 +116,9 @@ const Post = ({ post }) => {
                 <p onClick={() => liker(post._id)} className='likes'>{post.likes.length}  {post.likes.length < 2 ? 'like' : 'likes'}</p>
                 <p className='likes'>{post.comments.length}  {post.comments.length < 2 ? 'comment' : 'comments'}</p>
             </div>
+
             <p className='postMess'>{post.message}</p>
+
             {post._id === liked && <div className={mode ? 'babyDark' : 'baby'}>
                 <button onClick={() => setLiked('')} className='materialBtn'>
                     <span className="material-symbols-outlined">

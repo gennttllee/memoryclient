@@ -72,6 +72,7 @@ const Form = () => {
                 <textarea onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(/[, ]+/) })} className='input' placeholder='No # symbol allowed' maxLength={30}  value={postData.tags} />
             </fieldset>
             <div className='fileDiv'>
+            <legend>Upload images</legend>
                 <FileBase
                     type='file'
                     multiple={true}

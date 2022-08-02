@@ -6,7 +6,7 @@
 
 .form1 {
     width: 30rem;
-    margin: 5rem auto 0;
+    margin: 2rem auto 0;
     padding: 1rem 0;
     background-color: white;
 }
@@ -17,6 +17,8 @@
     background-color: inherit;
     color: inherit;
     font-weight: normal;
+    color: red;
+    margin-top: 0;
 }
 
 .darkForm {

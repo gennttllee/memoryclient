@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { theme } from '../features/themes/themeSlice';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
-import { addUser, user, signIn, signUp, getStatus, googleReg } from '../features/users/userSlice';
+import { error, user, signIn, signUp, getStatus, googleReg } from '../features/users/userSlice';
 
 
 const Auth = () => {
@@ -17,6 +17,7 @@ const Auth = () => {
     const status = useSelector(getStatus);
     const [message, setMessage] = useState('idle')
     const userInfo = useSelector(user);
+    const errorMessage = useSelector(error)
 
 
     const handleCallbackResponse = async (response) => {
@@ -24,26 +25,25 @@ const Auth = () => {
     };
 
     useEffect(() => {
-        if (userInfo !== null) {
+        if (userInfo !== null){
             navigate('/home')
-        } else {
-            /* global google */
-            try {
-                google.accounts.id.initialize({
-                    client_id: "406093640089-bv6bqbckvl4uh0svln5j0d3u2algnqpf.apps.googleusercontent.com",
-                    callback: handleCallbackResponse,
-                })
+        }
+        /* global google */
+        try {
+            google.accounts.id.initialize({
+                client_id: "406093640089-bv6bqbckvl4uh0svln5j0d3u2algnqpf.apps.googleusercontent.com",
+                callback: handleCallbackResponse,
+            })
 
-                google.accounts.id.renderButton(
-                    document.getElementById('div'),
-                    { theme: 'outline', size: 'large' }
-                )
+            google.accounts.id.renderButton(
+                document.getElementById('div'),
+                { theme: 'outline', size: 'large' }
+            )
 
-                google.accounts.id.prompt();
-            } catch (error) {
-                setMessage('fail')
-                console.log(error)
-            }
+            google.accounts.id.prompt();
+        } catch (error) {
+            setMessage('fail')
+            console.log(error)
         }
 
     }, [message, userInfo]);
@@ -73,11 +73,13 @@ const Auth = () => {
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
-
+    if (status === 'success'){
+        navigate('/home')
+    }
 
     return (
         <form onSubmit={submitForm} className={mode ? 'form1 darkForm' : 'form1'}>
-            {status.idle === 'failed' && <h2 className='invalid'>Invalid credentials</h2>}
+            {status === 'failed' && <h2 className='invalid'> {errorMessage}</h2>}
             {!log &&
                 <>
                     <fieldset className='fieldset1'>
@@ -95,6 +97,7 @@ const Auth = () => {
                 <input name='email' required onChange={handle} className='input1' type='email' />
             </fieldset>
             {!log && <div className='fieldset1'>
+                <legend>Profile picture</legend>
                 <FileBase
                     type='file'
                     multiple={false}
@@ -109,7 +112,7 @@ const Auth = () => {
                 <legend>Confirm Password</legend>
                 <input className='input1' required onChange={handle} name='confirmPassword' type='password' />
             </fieldset>}
-            <button className='btnSubmit' type='submit'>{status.idle === 'loading' ? 'loading' : 'Submit'}</button>
+            <button className='btnSubmit' type='submit'>{status === 'loading' ? 'loading' : 'Submit'}</button>
             <div className='google' id='div'></div>
             {!log ? <button className='btnLog' onClick={login}>already have an account ? Login here</button> : <button className='btnLog' onClick={sign}>Don't have an account ? sign up</button>}
         </form>

@@ -17,8 +17,6 @@
     color: inherit;
 }
 
-
-
 .postHead {
     display: flex;
     align-items: center;
@@ -126,8 +124,8 @@
 }
 
 .baby {
-    width: 90%;
-    top: 10%;
+    width: 14rem;
+    bottom: 13rem;
     padding: 0 1rem;
     margin: 1rem auto;
     position: absolute;
