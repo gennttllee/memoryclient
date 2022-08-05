@@ -4,7 +4,8 @@ import * as API from '../../api/index.js'
 const initialState = {
     user: JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : null,
     status: 'idle',
-    error: ''
+    error: '',
+    message : ''
 }
 
 export const signIn = createAsyncThunk('user/signIn', async (data, { rejectWithValue }) => {
@@ -28,6 +29,25 @@ export const googleReg = createAsyncThunk('user/googleReg', async (data, { rejec
 export const signUp = createAsyncThunk('user/signUp', async (data, { rejectWithValue }) => {
     try {
         const response = await API.signUp(data);
+        return response.data
+    } catch (error) {
+        throw rejectWithValue(error)
+    }
+})
+
+export const savePassword = createAsyncThunk('user/savePassword', async (data, { rejectWithValue }) => {
+
+    try {
+        const response = await API.savePass(data);
+        return response.data
+    } catch (error) {
+        throw rejectWithValue(error)
+    }
+})
+
+export const resetPassword = createAsyncThunk('user/resetPassword', async (email, { rejectWithValue }) => {
+    try {
+        const response = await API.resetPass(email);
         return response.data
     } catch (error) {
         throw rejectWithValue(error)
@@ -88,6 +108,31 @@ const userSlice = createSlice({
                 state.user = profile;
                 localStorage.setItem('user', JSON.stringify(profile))
             })
+            .addCase(resetPassword.pending, (state, action)=>{
+                state.status = 'loading'
+            })
+            .addCase(resetPassword.rejected, (state, action)=>{
+                state.status = 'failed'
+                state.error = action.payload.response.data.message
+            })
+            .addCase(resetPassword.fulfilled, (state, action)=>{
+                state.status = 'success'
+                state.error = action.payload.message
+                state.message = action.payload.otp
+            })
+            .addCase(savePassword.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(savePassword.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.payload.response.data.message
+            })
+            .addCase(savePassword.fulfilled, (state, action) => {
+                state.status = 'success'
+                const profile = { ...action.payload.result, token: action.payload.token }
+                state.user = profile;
+                localStorage.setItem('user', JSON.stringify(profile))
+            })
     }
 })
 
@@ -95,4 +140,5 @@ export const { addUser, logout } = userSlice.actions;
 export const getStatus = (state) => state.users.status;
 export const user = (state) => state.users.user
 export const error = (state) => state.users.error
+export const mess =(state) => state.users.message
 export default userSlice.reducer
