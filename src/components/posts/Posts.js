@@ -1,19 +1,12 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { selectAllPosts, getPostStatus, fetchPosts } from '../../features/posts/postSlice';
+import { useSelector } from 'react-redux';
+import { selectAllPosts, getPostStatus } from '../../features/posts/postSlice';
 import Post from './post/Post';
-import { useEffect } from 'react';
 import './posts.css';
 
 const Posts = () => {
-    const dispatch = useDispatch();
     const posts = useSelector(selectAllPosts)
     const status = useSelector(getPostStatus)
 
-    useEffect(() => {
-        if (posts.length < 1) {
-            dispatch(fetchPosts());
-        }
-    }, [posts, dispatch]);
 
     if (status === 'succeeded') {
 
