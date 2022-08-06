@@ -51,19 +51,7 @@ const Layout = ({ children }) => {
     return (
         <section className={mode ? 'darkTheme' : 'light'}>
             <section className='layoutChild'>
-                <nav className='nav'>
-                    <div className='loginDiv'>
-                        <button className='homeBtn' onClick={() => navigate('/home')}><span className="material-symbols-outlined">storage</span></button>
-                        <h5 className='memo'>Memories</h5>
-                    </div>
-                    <input value={word} type='search' onChange={(e) => setWord(e.target.value)} onKeyDown={pressed} placeholder='Search' className={mode ? 'searchDark' : 'search'} />
-                    <button className='navButton' onClick={() => dispatch(toggle())}>
-                        Theme :
-                        <span className="material-symbols-outlined">
-                            {mode ? '   toggle_on' : ' toggle_off'}
-                        </span>
-                    </button>
-                </nav>
+
                 {shows && <div className={mode ? 'darkDiver' : 'diver'}>
                     <Form />
                 </div>}
@@ -78,9 +66,21 @@ const Layout = ({ children }) => {
                     </div>
                     {children}
                 </main>
-                <footer>
 
-                </footer>
+                <nav className={mode ? 'navDark' : 'nav'}>
+                    <div className='loginDiv'>
+                        <button className='homeBtn' onClick={() => navigate('/home')}><span className="material-symbols-outlined">home</span></button>
+                        <h5 className='memo'>Memories</h5>
+                    </div>
+                    <input value={word} type='search' onChange={(e) => setWord(e.target.value)} onKeyDown={pressed} placeholder='Search' className={mode ? 'searchDark' : 'search'} />
+                    <button className='navButton' onClick={() => dispatch(toggle())}>
+                        Theme :
+                        <span className="material-symbols-outlined">
+                            {mode ? '   toggle_on' : ' toggle_off'}
+                        </span>
+                    </button>
+                </nav>
+
             </section>
         </section>
     )
