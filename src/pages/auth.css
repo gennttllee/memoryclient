@@ -58,7 +58,7 @@
 
 .btnLog {
     display: block;
-    margin: 2rem auto 1rem;
+    margin: 1rem auto 0;
     padding: .5rem 1rem;
     background-color: inherit;
     color: inherit;

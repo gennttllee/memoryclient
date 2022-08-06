@@ -1,16 +1,43 @@
-.form{
+.form {
     width: 20rem;
     height: fit-content;
     padding-bottom: 1rem;
 }
 
-.dark{
+.dark {
     color: white;
     background-color: rgba(128, 128, 128, 0.311);
 }
 
-.x{
-    color:  steelblue;
+.fileRow {
+    width: 4rem;
+}
+
+.postFileCon {
+    position: relative;
+    width: fit-content;
+}
+
+.place {
+    position: absolute;
+    background-color: white;
+    top: -1px;
+    right: -1px;
+    border: none;
+    outline: none;
+    border-radius: 100%;
+}
+
+.postFileRow {
+    display: flex;
+    gap: .5rem;
+    width: 90%;
+    margin: .7rem auto;
+    overflow-x: auto;
+}
+
+.x {
+    color: steelblue;
     display: flex;
     justify-content: flex-end;
     width: 100%;
@@ -18,24 +45,24 @@
     border: none;
 }
 
-.scale{
+.scale {
     transform: scale(2);
     margin: .7rem .7rem 0 0;
 }
 
-.fileDiv{
+.fileDiv {
     width: 90%;
     margin: 0 auto;
 }
 
-.h3{
+.h3 {
     text-align: center;
     font-size: 1.4rem;
     margin: 1rem 0 .5rem;
     text-transform: uppercase;
 }
 
-.input{
+.input {
     border: none;
     outline: none;
     resize: none;
@@ -44,26 +71,26 @@
     color: inherit;
 }
 
-.fieldSet{
+.fieldSet {
     width: 50%;
     margin: .5rem auto;
 }
 
-.fieldSet:focus-within{
-    border-color:  steelblue;
-    outline-color:  steelblue;
+.fieldSet:focus-within {
+    border-color: steelblue;
+    outline-color: steelblue;
 }
 
-.fieldSet:focus-within > legend{
+.fieldSet:focus-within>legend {
     color: steelblue;
 }
 
-.input:focus{
+.input:focus {
     outline: none;
     border: none;
 }
 
-.btn{
+.btn {
     display: block;
     width: 90%;
     height: 2.5rem;
@@ -75,7 +102,7 @@
     color: white;
 }
 
-.none{
+.none {
     display: block;
     width: 90%;
     height: 2.5rem;

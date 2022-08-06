@@ -146,6 +146,9 @@ const Auth = () => {
                             onDone={({ base64 }) => setData({ ...data, picture: base64 })}
                         />
                     </div>}
+                    {!log && <div>
+                        {data.picture && <img style={{width : '3rem', marginLeft : '1rem'}} src={data.picture} alt='profile'/>}
+                    </div>}
                     <fieldset className='fieldset1'>
                         <legend>Password</legend>
                         <input className='input1' required onChange={handle} name='password' type='password' />
