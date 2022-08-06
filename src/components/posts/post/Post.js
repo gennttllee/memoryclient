@@ -99,7 +99,7 @@ const Post = ({ post }) => {
 
             <div className='btnDiv'>
                 <button onClick={() => dispatch(likePost({ id: post._id, userInfo }))} className='likesBtn'>
-                    <span className={`fa fa-thumbs-up ${finder}`}></span>
+                    <span className={`fa fa-thumbs-up ${finder()}`}></span>
                 </button>
                 <button onClick={() => comment(post._id)} className='comments'>
                     <span className="material-symbols-outlined">
