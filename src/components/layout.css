@@ -190,7 +190,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: .1rem;
+    gap: 5px;
 }
 
 .homeBtn {
@@ -212,7 +212,7 @@
     }
 
     .memo {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .homeBtn {
@@ -220,14 +220,15 @@
         color: inherit;
         border: none;
         outline: none;
+        padding-right: 0;
     }
 
     .memo1 {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .navButton {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .write {
@@ -236,26 +237,26 @@
     }
 
     .search {
-        width: 40%;
+        width: 37%;
         height: 2.5rem;
         border: none;
     }
 
     .searchDark {
-        width: 40%;
+        width: 37%;
         height: 2.5rem;
         border: none;
     }
 
     .nav {
-        width: 95%;
-        left: 2%;
+        width: 98%;
+        left: 0;
         right: 2%;
     }
 
     .navDark {
-        width: 95%;
-        left: 2%;
+        width: 98%;
+        left: 0;
         right: 2%;
     }
 }

@@ -74,7 +74,7 @@ const Layout = ({ children }) => {
                     </div>
                     <input value={word} type='search' onChange={(e) => setWord(e.target.value)} onKeyDown={pressed} placeholder='Search' className={mode ? 'searchDark' : 'search'} />
                     <button className='navButton' onClick={() => dispatch(toggle())}>
-                        Theme :
+                        Theme:
                         <span className="material-symbols-outlined">
                             {mode ? '   toggle_on' : ' toggle_off'}
                         </span>
