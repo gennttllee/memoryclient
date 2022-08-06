@@ -2,6 +2,7 @@
     background-color: white;
     position: relative;
     color: black;
+    height: fit-content;
 }
 
 .dark {

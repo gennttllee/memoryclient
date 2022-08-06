@@ -50,13 +50,13 @@ const Post = ({ post }) => {
         }
     }
 
-    const finder = useMemo(() => {
+    const finder =() => {
         const comp = post.likes.find(item => {
             return item.email === userInfo.email
         })
         if (comp) return 'iconic'
         else return;
-    }, [post.likes, userInfo.email])
+    }
 
     const share = async (post) => {
         const url = `/post/${post._id}`

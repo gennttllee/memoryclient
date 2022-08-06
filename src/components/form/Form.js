@@ -69,7 +69,7 @@ const Form = () => {
             </button>
             <h3 className='h3'>{postData._id ? 'Edit' : 'Create'} a memory</h3>
             <fieldset className='fieldSet'>
-                <legend>Message</legend>
+                <legend>Caption</legend>
                 <textarea onChange={(e) => setPostData({ ...postData, message: e.target.value })} className='input' maxLength={500} value={postData.message} />
             </fieldset>
             <fieldset className='fieldSet'>
