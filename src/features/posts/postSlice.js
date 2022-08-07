@@ -6,7 +6,7 @@ const initialState = {
     status: 'idle',
     error: null,
     update: null,
-    show : false
+    show: false
 };
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
@@ -29,12 +29,12 @@ export const deletePost = createAsyncThunk('post/delete', async (id) => {
     return id;
 })
 
-export const likePost = createAsyncThunk('post/likePost', async ({id, userInfo})=>{
-    const response =await api.likePost(id, userInfo);
+export const likePost = createAsyncThunk('post/likePost', async ({ id, userInfo }) => {
+    const response = await api.likePost(id, userInfo);
     return response.data
 })
 
-export const commentPost = createAsyncThunk('post/comment', async (data)=>{
+export const commentPost = createAsyncThunk('post/comment', async (data) => {
     const id = data.post._id
     const response = await api.commentPost(data, id);
     return response.data
@@ -51,7 +51,7 @@ const postSlice = createSlice({
         populated: (state, action) => {
             state.update = null;
         },
-        setShow : (state, action)=>{
+        setShow: (state, action) => {
             state.show = !state.show
         }
     },
@@ -66,7 +66,8 @@ const postSlice = createSlice({
             })
             .addCase(fetchPosts.rejected, (state, action) => {
                 state.status = 'failed'
-                state.error = action.error.message
+                state.error = action.error
+                console.log(action)
             })
             .addCase(createPost.fulfilled, (state, action) => {
                 state.posts.unshift(action.payload)
@@ -119,7 +120,7 @@ const postSlice = createSlice({
 })
 
 export const { populate, populated, setShow } = postSlice.actions;
-export const show = (state)=> state.posts.show
+export const show = (state) => state.posts.show
 export const selectUpdate = (state) => state.posts.update;
 export const selectAllPosts = (state) => state.posts.posts;
 export const getPostStatus = (state) => state.posts.status;

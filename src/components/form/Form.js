@@ -50,11 +50,14 @@ const Form = () => {
     const poster = (base64) => {
         let newData = [...postData.file]
         base64.forEach(obj => {
-            newData.push(obj.base64)
+            if (obj.type === "image/jpeg" || obj.type === "image/jpg" || obj.type=== "image/png") {
+                newData.push(obj.base64)
+            }
         })
         setPostData({ ...postData, file: [...newData] })
     }
 
+    
     const remover = ( file) => {
         const data = postData.file.filter(item => item !== file)
         setPostData({...postData, file : [...data]})

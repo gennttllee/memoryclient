@@ -74,7 +74,7 @@ const userSlice = createSlice({
             })
             .addCase(signIn.rejected, (state, action) => {
                 state.status = 'failed'
-                state.error = action.payload.response.data.message
+                state.error = action.payload.response.data
             })
             .addCase(signIn.fulfilled, (state, action) => {
                 state.status = 'success'
