@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react';
 import { theme } from '../features/themes/themeSlice';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
-import { error, mess, user, signIn, signUp, getStatus, googleReg,savePassword, resetPassword } from '../features/users/userSlice';
+import { error, mess, user, signIn, signUp, getStatus, googleReg, savePassword, resetPassword } from '../features/users/userSlice';
 
 
 const Auth = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const initial = { firstName: '', lastName: '', email: '', token: '', newPassword : '', picture: '', password: '', confirmPassword: '' }
+    const initial = { firstName: '', lastName: '', email: '', token: '', newPassword: '', picture: '', password: '', confirmPassword: '' }
     const [data, setData] = useState(initial)
     const [log, setLog] = useState(true)
     const mode = useSelector(theme);
@@ -29,23 +29,24 @@ const Auth = () => {
     useEffect(() => {
         if (userInfo !== null) {
             navigate('/home')
-        }
-        /* global google */
-        try {
-            google.accounts.id.initialize({
-                client_id: process.env.REACT_APP_CLIENT_ID,
-                callback: handleCallbackResponse,
-            })
+        } else {
+            /* global google */
+            try {
+                google.accounts.id.initialize({
+                    client_id: process.env.REACT_APP_CLIENT_ID,
+                    callback: handleCallbackResponse,
+                })
 
-            google.accounts.id.renderButton(
-                document.getElementById('div'),
-                { theme: 'outline', size: 'large' }
-            )
+                google.accounts.id.renderButton(
+                    document.getElementById('div'),
+                    { theme: 'outline', size: 'large' }
+                )
 
-            google.accounts.id.prompt();
-        } catch (error) {
-            setMessage('fail')
-            console.log(error)
+                google.accounts.id.prompt();
+            } catch (error) {
+                setMessage('fail')
+                console.log(error)
+            }
         }
 
     }, [message, userInfo]);
@@ -143,11 +144,11 @@ const Auth = () => {
                         <FileBase
                             type='file'
                             multiple={false}
-                            onDone={(base64) => setData({ ...data, picture: base64})}
+                            onDone={(base64) => setData({ ...data, picture: base64 })}
                         />
                     </div>}
                     {!log && <div>
-                        {data.picture && <img style={{width : '3rem', marginLeft : '1rem'}} src={data.picture.base64} alt='profile'/>}
+                        {data.picture && <img style={{ width: '3rem', marginLeft: '1rem' }} src={data.picture.base64} alt='profile' />}
                     </div>}
                     <fieldset className='fieldset1'>
                         <legend >Password</legend>
