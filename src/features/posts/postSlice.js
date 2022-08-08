@@ -105,7 +105,6 @@ const postSlice = createSlice({
             .addCase(fetchPosts.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error
-                console.log(action)
             })
             .addCase(createPost.fulfilled, (state, action) => {
                 state.posts.unshift(action.payload)

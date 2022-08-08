@@ -44,8 +44,7 @@ const Auth = () => {
 
                 google.accounts.id.prompt();
             } catch (error) {
-                setMessage('fail')
-                console.log(error)
+                setMessage(error)
             }
         }
 
