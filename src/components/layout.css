@@ -67,7 +67,7 @@
 
 .diver {
     position: fixed;
-    top: 10%;
+    top: 5%;
     right: 5%;
     left: 5%;
     width: fit-content;
@@ -79,7 +79,7 @@
 
 .darkDiver {
     position: fixed;
-    top: 10%;
+    top: 5%;
     right: 5%;
     left: 5%;
     width: fit-content;
