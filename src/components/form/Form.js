@@ -25,15 +25,13 @@ const Form = () => {
 
     const save = postData.message && postData.file.length > 0 && postData.tags
 
-    const submit = (e) => {
-        e.preventDefault();
+    const submit = () => {
         if (postData._id) {
             dispatch(updatePost({
                 id: postData._id,
                 data: postData,
             }))
         } else {
-            console.log('boy')
             dispatch(createPost(postData))
         }
         clear();
@@ -50,21 +48,20 @@ const Form = () => {
     const poster = (base64) => {
         let newData = [...postData.file]
         base64.forEach(obj => {
-            if (obj.type === "image/jpeg" || obj.type === "image/jpg" || obj.type=== "image/png") {
-                newData.push(obj.base64)
+            if (obj.type === "image/jpeg" || obj.type === "image/jpg" || obj.type === "image/png") {
+                newData.push(obj)
             }
         })
         setPostData({ ...postData, file: [...newData] })
     }
 
-    
-    const remover = ( file) => {
+    const remover = (file) => {
         const data = postData.file.filter(item => item !== file)
-        setPostData({...postData, file : [...data]})
+        setPostData({ ...postData, file: [...data] })
     }
 
     return (
-        <form className={`form ${mode && 'dark'}`}>
+        <div className={`form ${mode && 'dark'}`}>
             <button onClick={() => dispatch(setShow())} className='x'>
                 <span className="material-symbols-outlined scale">
                     close
@@ -89,8 +86,8 @@ const Form = () => {
             </div>
             {postData.file.length > 0 && <div className='postFileRow'>
                 {postData.file.map((item, index) => <div className='postFileCon' key={index}>
-                    <img className='fileRow' src={item} alt='energy' />
-                    <button onClick={() => remover(item)} className='place'>
+                    <img className='fileRow' src={item.base64 || item} alt='energy' />
+                    <button onClick={()=>remover(item)} className='place'>
                         <span className="material-symbols-outlined">
                             close
                         </span>
@@ -98,8 +95,8 @@ const Form = () => {
                 </div>)}
             </div>}
             <button onClick={submit} type='submit' disabled={!save} className={save ? 'btn' : 'none'}>submit</button>
-            <button onClick={clear} disabled={!save} className={save ? 'btn' : 'none'}>clear</button>
-        </form>
+            <button onClick={ clear} disabled={!save} className={save ? 'btn' : 'none'}>clear</button>
+        </div>
     )
 }
 

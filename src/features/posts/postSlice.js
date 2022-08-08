@@ -14,14 +14,52 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
     return [...response.data]
 })
 
-export const createPost = createAsyncThunk('posts/createPost', async (newPost) => {
-    const response = await api.createPost(newPost);
-    return response.data
+export const createPost = createAsyncThunk('posts/createPost', async (newPost, { rejectWithValue }) => {
+    let images = [];
+    const { file } = newPost;
+    try {
+        for (const item of file) {
+            const formData = new FormData();
+            formData.append('file', item.file)
+            formData.append('upload_preset', 'my-uploads')
+            const data = await fetch('https://api.cloudinary.com/v1_1/gennttllee/image/upload', {
+                method: 'POST',
+                body: formData
+            }).then(r => r.json());
+            images.push(data.secure_url);
+        }
+        const post = { ...newPost, file: [...images] }
+        const response = await api.createPost(post);
+        return response.data
+    } catch (error) {
+        throw rejectWithValue(error)
+    }
 })
 
-export const updatePost = createAsyncThunk('post/updatePost', async ({ id, data }) => {
-    const response = await api.updatePost(id, data);
-    return response.data
+export const updatePost = createAsyncThunk('post/updatePost', async ({ id, data }, { rejectWithValue }) => {
+    let images = [];
+    const pictures = data.file;
+    try {
+        for (const item of pictures) {
+            if (item.base64) {
+                const formData = new FormData();
+                formData.append('file', item.file)
+                formData.append('upload_preset', 'my-uploads')
+                const data = await fetch('https://api.cloudinary.com/v1_1/gennttllee/image/upload', {
+                    method: 'POST',
+                    body: formData
+                }).then(r => r.json());
+                images.push(data.secure_url);
+            } else {
+                images.push(item)
+            }
+        }
+        const post = { ...data, file: [...images] }
+        const response = await api.updatePost(id, post);
+        return response.data
+    } catch (error) {
+        throw rejectWithValue(error)
+    }
 })
 
 export const deletePost = createAsyncThunk('post/delete', async (id) => {

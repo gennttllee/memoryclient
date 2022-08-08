@@ -143,19 +143,19 @@ const Auth = () => {
                         <FileBase
                             type='file'
                             multiple={false}
-                            onDone={({ base64 }) => setData({ ...data, picture: base64 })}
+                            onDone={(base64) => setData({ ...data, picture: base64})}
                         />
                     </div>}
                     {!log && <div>
-                        {data.picture && <img style={{width : '3rem', marginLeft : '1rem'}} src={data.picture} alt='profile'/>}
+                        {data.picture && <img style={{width : '3rem', marginLeft : '1rem'}} src={data.picture.base64} alt='profile'/>}
                     </div>}
                     <fieldset className='fieldset1'>
-                        <legend>Password</legend>
-                        <input className='input1' required onChange={handle} name='password' type='password' />
+                        <legend >Password</legend>
+                        <input autoComplete="off" className='input1' required onChange={handle} name='password' type='password' />
                     </fieldset>
                     {!log && <fieldset className='fieldset1'>
                         <legend>Confirm Password</legend>
-                        <input className='input1' required onChange={handle} name='confirmPassword' type='password' />
+                        <input autoComplete="off" className='input1' required onChange={handle} name='confirmPassword' type='password' />
                     </fieldset>}
                     <button className='btnSubmit' type='submit'>{status === 'loading' ? 'loading' : 'Submit'}</button>
                     <div className='google' id='div'></div>

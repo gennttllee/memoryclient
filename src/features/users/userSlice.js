@@ -5,7 +5,7 @@ const initialState = {
     user: JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : null,
     status: 'idle',
     error: '',
-    message : ''
+    message: ''
 }
 
 export const signIn = createAsyncThunk('user/signIn', async (data, { rejectWithValue }) => {
@@ -17,7 +17,7 @@ export const signIn = createAsyncThunk('user/signIn', async (data, { rejectWithV
     }
 })
 
-export const googleReg = createAsyncThunk('user/googleReg', async (data, { rejectWithValue })=> {
+export const googleReg = createAsyncThunk('user/googleReg', async (data, { rejectWithValue }) => {
     try {
         const response = await API.google(data);
         return response.data
@@ -26,9 +26,18 @@ export const googleReg = createAsyncThunk('user/googleReg', async (data, { rejec
     }
 })
 
-export const signUp = createAsyncThunk('user/signUp', async (data, { rejectWithValue }) => {
+export const signUp = createAsyncThunk('user/signUp', async (info, { rejectWithValue }) => {
+    const { picture } = info;
     try {
-        const response = await API.signUp(data);
+        const formData = new FormData();
+        formData.append('file', picture.file)
+        formData.append('upload_preset', 'my-uploads')
+        const data = await fetch('https://api.cloudinary.com/v1_1/gennttllee/image/upload', {
+            method: 'POST',
+            body: formData
+        }).then(r => r.json());
+        const newData = { ...info, picture:data.secure_url }
+        const response = await API.signUp(newData);
         return response.data
     } catch (error) {
         throw rejectWithValue(error)
@@ -108,14 +117,14 @@ const userSlice = createSlice({
                 state.user = profile;
                 localStorage.setItem('user', JSON.stringify(profile))
             })
-            .addCase(resetPassword.pending, (state, action)=>{
+            .addCase(resetPassword.pending, (state, action) => {
                 state.status = 'loading'
             })
-            .addCase(resetPassword.rejected, (state, action)=>{
+            .addCase(resetPassword.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.payload.response.data.message
             })
-            .addCase(resetPassword.fulfilled, (state, action)=>{
+            .addCase(resetPassword.fulfilled, (state, action) => {
                 state.status = 'success'
                 state.error = action.payload.message
                 state.message = action.payload.otp
@@ -140,5 +149,5 @@ export const { addUser, logout } = userSlice.actions;
 export const getStatus = (state) => state.users.status;
 export const user = (state) => state.users.user
 export const error = (state) => state.users.error
-export const mess =(state) => state.users.message
+export const mess = (state) => state.users.message
 export default userSlice.reducer

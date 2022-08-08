@@ -28,6 +28,10 @@
     border-radius: 100%;
 }
 
+.fileCss{
+    width: fit-content;
+}
+
 .postFileRow {
     display: flex;
     gap: .5rem;
