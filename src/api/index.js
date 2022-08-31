@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-/* */
+/* https://gennttllee.herokuapp.com */
 
-const API = axios.create({ baseURL: ' https://gennttllee.herokuapp.com' })
+const API = axios.create({ baseURL: 'https://gennttllee.herokuapp.com' })
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('user')) {
@@ -25,7 +25,11 @@ export const search = (id) => API.get(`/posts/${id}/search`);
 
 export const signIn = (data) => API.post('/user/signIn', data);
 export const resetPass = (email) => API.get(`user/reset/${email}`)
+export const fetchUser = (email) => API.get(`/user/info/${email}`)
 export const savePass = (data) => API.patch(`user/reset/${data.email}`, data)
 export const signUp = (data) => API.post('/user/signUp', data);
 export const searchProfile = (id) => API.get(`/user/${id}/profile`, id);
 export const google = (data) => API.post('/user/google', data)
+
+export const fetchChat = (email) => API.get(`/chat/${email}`)
+export const createChat = (data) => API.post(`/chat/${data.email}`,data)

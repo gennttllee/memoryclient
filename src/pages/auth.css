@@ -1,17 +1,17 @@
 .fieldset1 {
     width: 90%;
-    margin: 1rem auto 1rem;
+    margin: .5rem auto ;
     padding: 0;
 }
 
 .form1 {
     width: 30rem;
-    margin: 2rem auto 0;
+    margin: 0 auto 0;
     padding: 1rem 0;
     background-color: white;
 }
 
-.invalid{
+.invalid {
     width: 100%;
     text-align: center;
     background-color: inherit;
@@ -38,18 +38,35 @@
     border: none;
     outline: none;
     resize: none;
-    font-size: 1.3rem;
-    background-color: inherit ;
-    color: inherit ;
+    font-size: 1.1rem;
+    background-color: inherit;
+    color: inherit;
     width: 96%;
-    height: 2.5rem;
+    height: 2rem;
     padding-left: 1rem;
 }
 
-.input1:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
-    transition-delay: 36000000000s;
-  }
 
+.file {
+    display: none;
+}
+
+.profilePicPlus {
+    cursor: pointer;
+    width: 7rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7rem;
+    border-radius: 100%;
+    border: 1px dotted gray;
+}
+
+
+.input1:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    transition-delay: 36000000000s;
+}
 
 .input1:focus {
     outline: none;
@@ -59,12 +76,12 @@
 .btnLog {
     display: block;
     margin: 1rem auto 0;
-    padding: .5rem 1rem;
+    padding: .5rem .5rem;
     background-color: inherit;
     color: inherit;
-    border: none;
+    border: 1px dotted gray;
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .btnSubmit {
@@ -90,7 +107,7 @@
 }
 
 @media screen and (max-width : 600px) {
-    .form1{
+    .form1 {
         width: 80%;
     }
 }

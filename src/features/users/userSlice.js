@@ -5,7 +5,8 @@ const initialState = {
     user: JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : null,
     status: 'idle',
     error: '',
-    message: ''
+    message: '',
+    users: []
 }
 
 export const signIn = createAsyncThunk('user/signIn', async (data, { rejectWithValue }) => {
@@ -30,13 +31,14 @@ export const signUp = createAsyncThunk('user/signUp', async (info, { rejectWithV
     const { picture } = info;
     try {
         const formData = new FormData();
-        formData.append('file', picture.file)
+        formData.append('file', picture)
         formData.append('upload_preset', 'my-uploads')
         const data = await fetch('https://api.cloudinary.com/v1_1/gennttllee/image/upload', {
             method: 'POST',
             body: formData
-        }).then(r => r.json());
-        const newData = { ...info, picture:data.secure_url }
+        }).then(r => r.json())
+            .catch(error => rejectWithValue(error));
+        const newData = { ...info, picture: data.secure_url }
         const response = await API.signUp(newData);
         return response.data
     } catch (error) {
@@ -61,6 +63,11 @@ export const resetPassword = createAsyncThunk('user/resetPassword', async (email
     } catch (error) {
         throw rejectWithValue(error)
     }
+})
+
+export const fetchUsers = createAsyncThunk('user/fetchUsers', async (email) => {
+    const response = await API.fetchUser(email);
+    return response.data
 })
 
 const userSlice = createSlice({
@@ -142,6 +149,16 @@ const userSlice = createSlice({
                 state.user = profile;
                 localStorage.setItem('user', JSON.stringify(profile))
             })
+            .addCase(fetchUsers.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(fetchUsers.rejected, (state, action) => {
+                state.status = 'failed'
+            })
+            .addCase(fetchUsers.fulfilled, (state, action) => {
+                state.status = 'success'
+                state.users = action.payload;
+            })
     }
 })
 
@@ -150,4 +167,5 @@ export const getStatus = (state) => state.users.status;
 export const user = (state) => state.users.user
 export const error = (state) => state.users.error
 export const mess = (state) => state.users.message
+export const users = (state) => state.users.users
 export default userSlice.reducer

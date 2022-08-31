@@ -13,7 +13,7 @@
 }
 
 .search {
-    width: 50%;
+    width: 80%;
     height: 2.5rem;
     border: none;
     background-color: white;
@@ -28,7 +28,7 @@
 }
 
 .searchDark {
-    width: 50%;
+    width: 80%;
     height: 2.5rem;
     border: none;
     background-color: rgba(65, 64, 64, 0.855);
@@ -117,6 +117,7 @@
 .nav {
     position: fixed;
     bottom: 0;
+    height: 3rem;
     display: flex;
     width: 70%;
     justify-content: space-between;
@@ -128,6 +129,7 @@
 }
 
 .navDark {
+    height: 3rem;
     position: fixed;
     bottom: 0;
     display: flex;
@@ -161,7 +163,7 @@
 }
 
 .layoutChild {
-    margin: 0 auto;
+    margin: 0 auto 1rem;
     width: 70%;
 }
 
@@ -188,9 +190,11 @@
 
 .loginDiv {
     display: flex;
-    justify-content: space-between;
+    width: 10%;
+    justify-content: flex-start;
     align-items: center;
-    gap: 5px;
+    height: fit-content;
+    gap: 10%;
 }
 
 .homeBtn {
@@ -198,12 +202,15 @@
     color: inherit;
     border: none;
     outline: none;
+    display: flex;
+    align-items: center;
+    gap: 10%;
 }
 
 @media screen and (max-width : 800px) {
     .layoutChild {
         width: 98%;
-        margin: 0 auto;
+        margin: 0 auto 1rem;
     }
 
     .createBtn {
@@ -237,13 +244,13 @@
     }
 
     .search {
-        width: 37%;
+        width: 80%;
         height: 2.5rem;
         border: none;
     }
 
     .searchDark {
-        width: 37%;
+        width: 80%;
         height: 2.5rem;
         border: none;
     }

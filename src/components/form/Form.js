@@ -1,5 +1,4 @@
 import './form.css'
-import FileBase from 'react-file-base64';
 import { useState, useEffect } from 'react';
 import { createPost, updatePost, selectUpdate, populated, setShow } from '../../features/posts/postSlice'
 import { user } from '../../features//users/userSlice'
@@ -22,8 +21,7 @@ const Form = () => {
         }
     }, [updates]);
 
-
-    const save = postData.message && postData.file.length > 0 && postData.tags
+    const save = postData.message && postData.file.length > 0 && postData.tags.length > 0
 
     const submit = () => {
         if (postData._id) {
@@ -45,14 +43,13 @@ const Form = () => {
         })
     }
 
-    const poster = (base64) => {
-        let newData = [...postData.file]
-        base64.forEach(obj => {
-            if (obj.type === "image/jpeg" || obj.type === "image/jpg" || obj.type === "image/png") {
-                newData.push(obj)
-            }
+    const poster = (e) => {
+        let items = [...postData.file];
+        Array.from(e.target.files).forEach(file => {
+            const base64 = URL.createObjectURL(file)
+            items.push({ base64, file })
         })
-        setPostData({ ...postData, file: [...newData] })
+        setPostData({ ...postData, file: items })
     }
 
     const remover = (file) => {
@@ -68,34 +65,34 @@ const Form = () => {
                 </span>
             </button>
             <h3 className='h3'>{postData._id ? 'Edit' : 'Create'} a memory</h3>
-            <fieldset className='fieldSet'>
-                <legend>Caption</legend>
-                <textarea onChange={(e) => setPostData({ ...postData, message: e.target.value })} className='input' maxLength={500} value={postData.message} />
-            </fieldset>
-            <fieldset className='fieldSet'>
-                <legend>Tags</legend>
-                <textarea onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(/[, ]+/) })} className='input' placeholder='No # symbol allowed' maxLength={30} value={postData.tags} />
-            </fieldset>
-            <div className='fileDiv'>
-                <legend>Upload images</legend>
-                <FileBase
-                    type='file'
-                    multiple={true}
-                    onDone={(base64) => poster(base64)}
-                />
-            </div>
-            {postData.file.length > 0 && <div className='postFileRow'>
-                {postData.file.map((item, index) => <div className='postFileCon' key={index}>
+            <div className='postFileRow'>
+                <label htmlFor='fame' className={postData.file.length > 0 ? 'label1' : 'label'}>
+                    {postData.file.length > 0 ? <div className='instagram'>
+                        <span className='plus1'>+</span>
+                    </div>
+                        : <div className='facebook'><span className='plus'>+</span>
+                            <span>upload images</span> </div>}
+                    <input onChange={poster} className='hide' multiple id='fame' type='file' accept="image/png, image/jpg, image/gif, image/jpeg" />
+                </label>
+                {postData.file.length > 0 && postData.file.map((item, index) => <div className='postFileCon' key={index}>
                     <img className='fileRow' src={item.base64 || item} alt='energy' />
-                    <button onClick={()=>remover(item)} className='place'>
+                    <button onClick={() => remover(item)} className='place'>
                         <span className="material-symbols-outlined">
                             close
                         </span>
                     </button>
                 </div>)}
-            </div>}
-            <button onClick={submit} type='submit' disabled={!save} className={save ? 'btn' : 'none'}>submit</button>
-            <button onClick={ clear} disabled={!save} className={save ? 'btn' : 'none'}>clear</button>
+            </div>
+            <fieldset className='fieldSet'>
+                <legend>Caption</legend>
+                <input type='text' onChange={(e) => setPostData({ ...postData, message: e.target.value })} className='input' maxLength={500} value={postData.message} />
+            </fieldset>
+            <fieldset className='fieldSet'>
+                <legend>Tags</legend>
+                <input type='text' onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(/[, ]+/) })} className='input' placeholder='No # symbol allowed' maxLength={30} value={postData.tags} />
+            </fieldset>
+            <button onClick={submit} type='submit' disabled={!save} className={save ? 'btn' : 'none'}>Post</button>
+            <button onClick={clear} disabled={!save} className={save ? 'btn' : 'none'}>clear</button>
         </div>
     )
 }

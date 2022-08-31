@@ -1,0 +1,72 @@
+.img {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+}
+
+.section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: .5rem;
+}
+
+.greens {
+    color: rgb(11, 243, 11);
+}
+
+.chat {
+    position: relative;
+    height: 100vh;
+    width: 75%;
+    border:
+        solid gray;
+    border-width: 0 0 0 1px;
+}
+
+.send {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.inputMessage {
+    height: 2.5rem;
+    width: 92%;
+    padding-left: 1rem;
+}
+
+.plane {
+    border: none;
+    color: rgb(81, 116, 187);
+    font-size: 1.3rem;
+    margin-left: 1rem;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.contactBtn {
+    border: none;
+    background-color: inherit;
+    color: rgb(81, 116, 187);
+    font-size: 1.4rem;
+    margin-right: 1rem;
+}
+
+.divContact{
+    width: 25%;
+}

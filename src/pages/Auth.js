@@ -1,13 +1,13 @@
-import FileBase from 'react-file-base64';
+
 import './auth.css'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { theme } from '../features/themes/themeSlice';
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import { error, mess, user, signIn, signUp, getStatus, googleReg, savePassword, resetPassword } from '../features/users/userSlice';
 
-
 const Auth = () => {
+    const pic = useRef()
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const initial = { firstName: '', lastName: '', email: '', token: '', newPassword: '', picture: '', password: '', confirmPassword: '' }
@@ -21,17 +21,16 @@ const Auth = () => {
     const [forget, setForget] = useState(false)
     const otp = useSelector(mess)
 
-
-    const handleCallbackResponse = async (response) => {
-        dispatch(googleReg({ profile: response.credential }));
-    };
-
     useEffect(() => {
         if (userInfo !== null) {
             navigate('/home')
         } else {
             /* global google */
             try {
+                const handleCallbackResponse = async (response) => {
+                    dispatch(googleReg({ profile: response.credential }));
+                };
+
                 google.accounts.id.initialize({
                     client_id: process.env.REACT_APP_CLIENT_ID,
                     callback: handleCallbackResponse,
@@ -48,7 +47,7 @@ const Auth = () => {
             }
         }
 
-    }, [message, userInfo]);
+    }, [dispatch, navigate, userInfo]);
 
     const sign = (e) => {
         e.preventDefault()
@@ -83,6 +82,13 @@ const Auth = () => {
 
     const extracted = data.email;
 
+    const changes = (e) => {
+        const url = URL.createObjectURL(e.target.files[0])
+        setData({ ...data, picture: e.target.files[0] })
+        pic.current.style.background = `url(${url})`
+        pic.current.style.backgroundSize = 'cover'
+        pic.current.style.backgroundPosition = 'center'
+    }
 
     const passwordReset = (e) => {
         e.preventDefault()
@@ -124,6 +130,10 @@ const Auth = () => {
                     {status === 'failed' && <h2 className='invalid'> {errorMessage}</h2>}
                     {!log &&
                         <>
+                            <label ref={pic} className='profilePicPlus' htmlFor='fame'>
+                                <span className='material-symbols-outlined spanCoverPlus'> photo_camera</span>
+                                <input onChange={changes} className='file' id='fame' type='file' accept="image/png, image/jpg, image/gif, image/jpeg" />
+                            </label>
                             <fieldset className='fieldset1'>
                                 <legend>First Name</legend>
                                 <input required onChange={handle} className='input1' name='firstName' type='text' />
@@ -138,17 +148,6 @@ const Auth = () => {
                         <legend>Email Address</legend>
                         <input name='email' required onChange={handle} className='input1' type='email' />
                     </fieldset>
-                    {!log && <div className='fieldset1'>
-                        <legend>Profile picture</legend>
-                        <FileBase
-                            type='file'
-                            multiple={false}
-                            onDone={(base64) => setData({ ...data, picture: base64 })}
-                        />
-                    </div>}
-                    {!log && <div>
-                        {data.picture && <img style={{ width: '3rem', marginLeft: '1rem' }} src={data.picture.base64} alt='profile' />}
-                    </div>}
                     <fieldset className='fieldset1'>
                         <legend >Password</legend>
                         <input autoComplete="off" className='input1' required onChange={handle} name='password' type='password' />

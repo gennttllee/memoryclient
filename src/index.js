@@ -12,6 +12,7 @@ import Search from './pages/Search';
 import Creator from './pages/Creator';
 import PostId from './pages/PostId';
 import Support from './pages/Support'
+import Chat from './pages/chats/Chat';
 
 store.dispatch(fetchPosts())
 
@@ -29,6 +30,7 @@ root.render(
           <Route path='search/:key' element={<Search />} />
           <Route path="profile/:creator" element={<Creator />} />
           <Route path="post/:id" element={<PostId />} />
+          <Route path="chat/:id" element={<Chat />} />
         </Routes>
       </BrowserRouter>
     </Provider>
