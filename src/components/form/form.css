@@ -125,7 +125,7 @@
 }
 
 .inputField{
-    background-color: inherit;
+    background-color: transparent;
     color: inherit;
     font-size: 1.2rem;
     width: 90%;

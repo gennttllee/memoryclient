@@ -18,6 +18,7 @@
     }
 
     .flex{
+        display: block;
         height: auto;
     }
 }
