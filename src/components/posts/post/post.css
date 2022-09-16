@@ -2,7 +2,7 @@
     background-color: white;
     position: relative;
     color: black;
-    height: fit-content;
+    width: 80%;
 }
 
 .dark {
@@ -260,5 +260,9 @@
 
     .swiper-button-next {
         display: none !important;
+    }
+
+    .postDiv{
+        width: 95%;
     }
 }

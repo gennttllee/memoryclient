@@ -66,6 +66,11 @@ const Layout = ({ children }) => {
                 </main>
 
                 <nav className={mode ? 'navDark' : 'nav'}>
+                    <div className='udIcon'>
+                        <button onClick={() => navigate('/profile')} className='pictureButton'>
+                            <img referrerPolicy="no-referrer" className='picture' src={userInfo.picture} alt='pictures' />
+                        </button>
+                    </div>
                     <div className='loginDiv'>
                         <button className='homeBtn' onClick={() => navigate('/home')}><span className="material-symbols-outlined">home</span></button>
                     </div>

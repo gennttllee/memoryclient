@@ -1,0 +1,23 @@
+.flex{
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-start;
+    height: 90vh;
+    margin-top: 1rem;
+}
+
+.form{
+    width: 50%;
+    height: 100%;
+}
+
+
+@media screen and (max-width : 800px) {
+    .form{
+        display: none;
+    }
+
+    .flex{
+        height: auto;
+    }
+}

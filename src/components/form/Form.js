@@ -1,6 +1,6 @@
 import './form.css'
 import { useState, useEffect } from 'react';
-import { createPost, updatePost, selectUpdate, populated, setShow } from '../../features/posts/postSlice'
+import { createPost, updatePost, selectUpdate, populated, show, setShow } from '../../features/posts/postSlice'
 import { user } from '../../features//users/userSlice'
 import { theme } from '../../features/themes/themeSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ const Form = () => {
     const updates = useSelector(selectUpdate);
     const mode = useSelector(theme)
     const userInfo = useSelector(user);
+    const shows = useSelector(show)
 
     const [postData, setPostData] = useState({
         name: `${userInfo.name}`, email: `${userInfo.email}`, picture: `${userInfo.picture}`, title: '', message: '', file: [], tags: ''
@@ -60,9 +61,9 @@ const Form = () => {
     return (
         <div className={`form ${mode && 'dark'}`}>
             <button onClick={() => dispatch(setShow())} className='x'>
-                <span className="material-symbols-outlined scale">
+                {shows && <span className="material-symbols-outlined scale">
                     close
-                </span>
+                </span>}
             </button>
             <h3 className='h3'>{postData._id ? 'Edit' : 'Create'} a memory</h3>
             <div className='postFileRow'>
@@ -83,16 +84,13 @@ const Form = () => {
                     </button>
                 </div>)}
             </div>
-            <fieldset className='fieldSet'>
-                <legend>Caption</legend>
-                <input type='text' onChange={(e) => setPostData({ ...postData, message: e.target.value })} className='input' maxLength={500} value={postData.message} />
-            </fieldset>
-            <fieldset className='fieldSet'>
-                <legend>Tags</legend>
-                <input type='text' onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(/[, ]+/) })} className='input' placeholder='No # symbol allowed' maxLength={30} value={postData.tags} />
-            </fieldset>
+
+            <input type='text' onChange={(e) => setPostData({ ...postData, message: e.target.value })} className='inputField' placeholder='Caption' maxLength={500} value={postData.message} />
+
+            <input type='text' onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(/[, ]+/) })} className='inputField' placeholder=' Tags, No # symbol allowed' maxLength={30} value={postData.tags} />
+
             <button onClick={submit} type='submit' disabled={!save} className={save ? 'btn' : 'none'}>Post</button>
-            <button onClick={clear} disabled={!save} className={save ? 'btn' : 'none'}>clear</button>
+            <button onClick={clear}  className='btn' >clear</button>
         </div>
     )
 }
