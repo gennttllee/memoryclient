@@ -2,7 +2,7 @@ import axios from 'axios';
 
 /* https://gennttllee.herokuapp.com */
 
-const API = axios.create({ baseURL: 'https://gennttllee.herokuapp.com' })
+const API = axios.create({ baseURL: 'https://memory-server.onrender.com/' })
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('user')) {
